@@ -50,6 +50,53 @@
       animation: subtleGlow 4s ease-in-out infinite alternate;
     }
     
+    .sequence-display {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      max-width: 800px;
+      width: 90vw;
+      text-align: center;
+    }
+    
+    .sequence-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 15px;
+    }
+    
+    .sequence-numbers {
+      font-size: 16px;
+      color: #64748b;
+      line-height: 1.6;
+      min-height: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .sequence-number {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(99, 102, 241, 0.2);
+      animation: numberAppear 0.3s ease-out;
+    }
+    
+    @keyframes numberAppear {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
     @keyframes subtleGlow {
       from { filter: drop-shadow(0 2px 4px rgba(51, 65, 85, 0.1)); }
       to { filter: drop-shadow(0 4px 8px rgba(100, 116, 139, 0.15)); }
@@ -101,15 +148,17 @@
       padding: 40px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.5);
-      max-width: 600px;
-      width: 90vw;
+      max-width: 1300px;
+      width: 95vw;
+      margin: 0 auto;
     }
     
     table {
       width: 100%;
+      max-width: 400px;
       border-collapse: separate;
       border-spacing: 8px;
-      margin-bottom: 30px;
+      margin: 0 auto 30px auto;
     }
     
     td {
@@ -298,9 +347,91 @@
     
     /* Responsive Design */
     @media (max-width: 768px) {
+      .game-container {
+        max-width: 95vw;
+        width: 95vw;
+        padding: 25px;
+      }
+      
       td { width: 60px; height: 60px; font-size: 22px; }
       h1 { font-size: 48px; letter-spacing: 6px; }
       #bingo-letters span { width: 50px; height: 50px; font-size: 28px; }
+      
+      table {
+        max-width: 320px;
+      }
+      
+      .vs-computer-interface {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+        justify-items: center;
+        padding: 0 10px;
+        place-items: center;
+      }
+      
+      .called-number-display {
+        order: -1;
+        min-width: auto;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .player-section {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        min-width: auto;
+      }
+      
+      .player-bingo-letters span {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+      
+      .called-number {
+        font-size: 42px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .game-container {
+        padding: 20px;
+        width: 98vw;
+      }
+      
+      table {
+        max-width: 280px;
+      }
+      
+      .vs-computer-interface {
+        gap: 20px;
+        padding: 0 5px;
+      }
+      
+      .player-section {
+        min-width: auto;
+        max-width: 300px;
+      }
+      
+      td { width: 50px; height: 50px; font-size: 18px; }
+      
+      .player-bingo-letters {
+        gap: 8px;
+      }
+      
+      .player-bingo-letters span {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+      }
+      
+      .called-number-display {
+        max-width: 260px;
+        padding: 18px;
+      }
     }
 
     /* Instruction Modal */
@@ -400,15 +531,317 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
     }
+    
+    .win-sequence {
+      margin: 30px 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .win-sequence-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .win-sequence-numbers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    
+    .win-sequence-numbers .sequence-number {
+      background: rgba(255, 255, 255, 0.9);
+      color: #6366f1;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* VS Computer Mode Styles */
+    .game-mode-selector {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .mode-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .mode-btn {
+      background: linear-gradient(135deg, #64748b, #475569);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(100, 116, 139, 0.15);
+    }
+
+    .mode-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(100, 116, 139, 0.25);
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    .vs-computer-interface {
+      display: none;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: start;
+      justify-items: center;
+      margin: 0 auto 20px auto;
+      max-width: 1200px;
+      width: 100%;
+      place-items: center;
+    }
+
+    .player-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-width: 350px;
+      width: 100%;
+    }
+
+    .player-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #475569;
+    }
+
+    .player-title.you {
+      color: #6366f1;
+    }
+
+    .player-title.computer {
+      color: #dc2626;
+    }
+
+    .player-bingo-letters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .player-bingo-letters span {
+      width: 45px; 
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-style: preserve-3d;
+      color: #475569;
+    }
+
+    .player-bingo-letters span.striked {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transform: rotateY(180deg) scale(1.05);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+      text-decoration: line-through;
+      animation: letterStrike 0.6s ease-out;
+      color: white;
+    }
+
+    .computer-bingo-letters span.striked {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: white;
+    }
+
+    .computer-grid {
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .computer-grid td.striked {
+      background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+    }
+
+    .called-number-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      border: 2px solid rgba(99, 102, 241, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(15px);
+    }
+
+    .called-number {
+      font-size: 56px;
+      font-weight: 900;
+      color: #6366f1;
+      margin-bottom: 12px;
+      animation: numberPulse 0.5s ease-out;
+      text-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+    }
+
+    .called-label {
+      font-size: 16px;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .turn-indicator {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 25px;
+      margin-bottom: 20px;
+      animation: turnPulse 1.5s ease-in-out infinite;
+      text-align: center;
+      min-width: 180px;
+    }
+
+    .turn-indicator.player-turn {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+
+    .turn-indicator.computer-turn {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: white;
+    }
+
+    @keyframes turnPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+
+    .call-button {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+
+    .call-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.25);
+    }
+
+    .call-button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @keyframes numberPulse {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes numberHighlight {
+      0% { background: #fbbf24; transform: scale(1); }
+      50% { background: #f59e0b; transform: scale(1.1); }
+      100% { background: initial; transform: scale(1); }
+    }
+
+    .game-controls {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .speed-control {
+      margin: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .speed-slider {
+      width: 100px;
+    }
   </style>
 </head>
 <body>
   <div class="debug-info" id="debug-info" style="display: none;"></div>
   <div class="starfield"></div>
   <h1>BINGO</h1>
+  
+  <!-- Called Numbers Sequence Display -->
+  <div class="sequence-display" id="sequence-display" style="display: none;">
+    <div class="sequence-title">Called Numbers:</div>
+    <div class="sequence-numbers" id="sequence-numbers">Start playing to see called numbers</div>
+  </div>
+  
   <div id="bingo-letters"></div>
   <div class="game-container">
     <div id="setup-panel" class="setup-panel"></div>
+    
+    <!-- VS Computer Interface -->
+    <div class="vs-computer-interface" id="vs-computer-interface">
+      <div class="player-section">
+        <div class="player-title you">🎯 Your Grid</div>
+        <div class="player-bingo-letters" id="player-bingo-letters"></div>
+        <div id="player-container"></div>
+      </div>
+      
+      <div class="called-number-display">
+        <div class="turn-indicator" id="turn-indicator">Your Turn</div>
+        <div class="called-number" id="called-number">-</div>
+        <div class="called-label">Last Called</div>
+        <div style="font-size: 14px; color: #64748b; margin-top: 10px; text-align: center;">
+          Click a number on your grid to call it!
+        </div>
+      </div>
+      
+      <div class="player-section">
+        <div class="player-title computer">🤖 Computer</div>
+        <div class="player-bingo-letters computer-bingo-letters" id="computer-bingo-letters"></div>
+        <div id="computer-container" class="computer-grid"></div>
+      </div>
+    </div>
+    
     <div id="container" style="display:none;"></div>
     <div style="text-align: center;">
       <button id="reset-btn" class="btn" onclick="resetGame()" style="display:none;">🔄 Reset Game</button>
@@ -424,15 +857,21 @@
   <div class="modal-overlay" id="instruction-modal" style="display: none;">
     <div class="modal">
       <h2>🎯 How to Play BINGO</h2>
+      
+      <p><strong>Game Modes:</strong></p>
+      <p>• <span class="highlight">🎯 Solo Play</span> - Classic single-player BINGO</p>
+      <p>• <span class="highlight">🤖 VS Computer</span> - Turn-based competition!</p>
+      
       <p><strong>Setup Phase:</strong></p>
       <p>• Click on empty cells to place numbers 1-25</p>
       <p>• Use <span class="highlight">🎲 Randomize</span> for quick setup</p>
       <p>• Click <span class="highlight">🚀 Start Game</span> when ready</p>
       
       <p><strong>Game Phase:</strong></p>
-      <p>• Click numbers to mark them as called</p>
+      <p>• <strong>Solo:</strong> Click numbers to mark them as called</p>
+      <p>• <strong>VS Computer:</strong> Take turns - click a number on your grid to call it. That number gets marked on <span class="highlight">both grids</span></p>
       <p>• Complete <span class="highlight">rows or columns</span> to strike BINGO letters</p>
-      <p>• Get all 5 letters to win!</p>
+      <p>• First to get all 5 letters wins!</p>
       
       <p><small>💡 You can view these instructions anytime using the <span class="highlight">❓ Instructions</span> button</small></p>
       
@@ -445,6 +884,10 @@
     <div class="win-content">
       <div class="win-title">🏆 BINGO! 🏆</div>
       <div class="win-subtitle">Congratulations, You Won!</div>
+      <div class="win-sequence">
+        <div class="win-sequence-title">Numbers Called:</div>
+        <div class="win-sequence-numbers" id="win-sequence-numbers"></div>
+      </div>
       <button class="btn" onclick="hideWinOverlay()">Play Again</button>
     </div>
   </div>
@@ -458,6 +901,15 @@ let nextNumber = 1;
 const ROWS = 5, COLS = 5;
 let debugMode = false;
 let completedLinesTracker = []; // Track which specific lines are completed
+
+// Computer opponent variables
+let gameMode = 'single'; // 'single' or 'vsComputer'
+let computerGrid, computerStrikes;
+let calledNumbers = [];
+let currentCalledNumber = null;
+let gameEnded = false;
+let isPlayerTurn = true; // Track whose turn it is
+let turnIndicator = null;
 
 // Initialize starfield
 function createStarfield() {
@@ -476,7 +928,15 @@ function createStarfield() {
 function showSetupPanel() {
   loadSetupProgress();
   
-  let html = '<h3>🎯 Click cells to place numbers 1–25<br><small>Your progress is automatically saved!</small></h3>';
+  let html = '<div class="game-mode-selector">';
+  html += '<h3>🎮 Choose Game Mode</h3>';
+  html += '<div class="mode-buttons">';
+  html += `<button class="mode-btn ${gameMode === 'single' ? 'active' : ''}" onclick="setGameMode('single')">🎯 Solo Play</button>`;
+  html += `<button class="mode-btn ${gameMode === 'vsComputer' ? 'active' : ''}" onclick="setGameMode('vsComputer')">🤖 VS Computer</button>`;
+  html += '</div>';
+  html += '</div>';
+  
+  html += '<h3>🎯 Click cells to place numbers 1–25<br><small>Your progress is automatically saved!</small></h3>';
   html += '<div id="current-number">Next number: <span id="next-num">' + nextNumber + '</span></div>';
   html += '<table id="setup-table">';
   for (let i = 0; i < ROWS; i++) {
@@ -537,6 +997,395 @@ function clearSetup() {
   showSetupPanel();
 }
 
+function setGameMode(mode) {
+  gameMode = mode;
+  // Update button states
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Save game mode preference
+  localStorage.setItem('bingoGameMode', mode);
+}
+
+function generateComputerGrid() {
+  gameMode = mode;
+  // Update button states
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Save game mode preference
+  localStorage.setItem('bingoGameMode', mode);
+}
+
+function generateComputerGrid() {
+  let nums = Array.from({length: 25}, (_,i) => i+1);
+  // Shuffle array
+  for (let i = nums.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [nums[i], nums[j]] = [nums[j], nums[i]];
+  }
+  
+  // Convert to 5x5 grid
+  computerGrid = [];
+  for(let i=0; i<ROWS; i++) {
+    computerGrid.push(nums.slice(i*5, (i+1)*5));
+  }
+  
+  computerStrikes = Array.from({length:ROWS}, ()=>Array(COLS).fill(false));
+}
+
+function drawComputerGrid() {
+  let html='<table>';
+  for(let i=0;i<ROWS;i++) {
+    html += '<tr>';
+    for(let j=0;j<COLS;j++) {
+      let num = computerGrid[i][j];
+      let cls = computerStrikes[i][j] ? 'striked' : '';
+      html += `<td class="${cls}">${num}</td>`;
+    }
+    html+='</tr>';
+  }
+  html+='</table>';
+  document.getElementById('computer-container').innerHTML = html;
+}
+
+function drawPlayerGrid() {
+  let html='<table>';
+  for(let i=0;i<ROWS;i++) {
+    html += '<tr>';
+    for(let j=0;j<COLS;j++) {
+      let num = grid[i][j];
+      let cls = strikes[i][j] ? 'striked' : '';
+      html += `<td class="${cls}" onclick="toggleStrike(${i},${j})">${num}</td>`;
+    }
+    html+='</tr>';
+  }
+  html+='</table>';
+  document.getElementById('player-container').innerHTML = html;
+}
+
+function drawBingoLetters(containerId = 'bingo-letters', strikesArray = strikes, gridArray = grid) {
+  // For solo mode, use the old countCompletedLines function
+  const completedCount = containerId === 'bingo-letters' ? 
+    countCompletedLines() : countCompletedLinesForGrid(strikesArray);
+  
+  let html='';
+  for (let i = 0; i < 5; i++) {
+    const isStruck = i < completedCount;
+    const additionalClass = containerId === 'computer-bingo-letters' ? 'computer-bingo-letters' : '';
+    html += `<span class="${isStruck ? 'striked' : ''} ${additionalClass}">${BINGO[i]}</span>`;
+  }
+  
+  const element = document.getElementById(containerId);
+  if (element) {
+    element.innerHTML = html;
+  }
+}
+
+function countCompletedLinesForGrid(strikesArray) {
+  let completedLines = [];
+  
+  // Check each row
+  for(let rowIndex = 0; rowIndex < ROWS; rowIndex++) {
+    let rowComplete = true;
+    for(let colIndex = 0; colIndex < COLS; colIndex++) {
+      if(strikesArray[rowIndex][colIndex] !== true) {
+        rowComplete = false;
+        break;
+      }
+    }
+    if(rowComplete) {
+      completedLines.push(`row-${rowIndex}`);
+    }
+  }
+  
+  // Check each column
+  for(let colIndex = 0; colIndex < COLS; colIndex++) {
+    let columnComplete = true;
+    for(let rowIndex = 0; rowIndex < ROWS; rowIndex++) {
+      if(strikesArray[rowIndex][colIndex] !== true) {
+        columnComplete = false;
+        break;
+      }
+    }
+    if(columnComplete) {
+      completedLines.push(`col-${colIndex}`);
+    }
+  }
+  
+  return Math.min(completedLines.length, 5);
+}
+
+function playerCallNumber() {
+  if (!isPlayerTurn || gameEnded) return;
+  
+  callNumber();
+  switchTurn();
+}
+
+function computerCallNumber() {
+  if (isPlayerTurn || gameEnded) return;
+  
+  // Computer picks a random number from its grid that hasn't been called
+  let availableNumbers = [];
+  for (let i = 0; i < ROWS; i++) {
+    for (let j = 0; j < COLS; j++) {
+      const num = computerGrid[i][j];
+      if (!calledNumbers.includes(num)) {
+        availableNumbers.push(num);
+      }
+    }
+  }
+  
+  if (availableNumbers.length === 0) {
+    endGame('draw');
+    return;
+  }
+  
+  // Computer takes time to "think"
+  setTimeout(() => {
+    if (gameEnded) return;
+    
+    // Pick random available number
+    const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+    const computerNumber = availableNumbers[randomIndex];
+    
+    // Add to called numbers
+    calledNumbers.push(computerNumber);
+    currentCalledNumber = computerNumber;
+    
+    // Update sequence display
+    updateSequenceDisplay();
+    
+    // Update display
+    document.getElementById('called-number').textContent = computerNumber;
+    
+    // Mark on both grids
+    markNumberOnGrid(computerNumber, grid, strikes);
+    markNumberOnGrid(computerNumber, computerGrid, computerStrikes);
+    
+    // Add visual highlight
+    highlightCalledNumber(computerNumber);
+    
+    // Redraw grids
+    drawPlayerGrid();
+    drawComputerGrid();
+    drawBingoLetters('player-bingo-letters', strikes, grid);
+    drawBingoLetters('computer-bingo-letters', computerStrikes, computerGrid);
+    
+    // Check for wins
+    if (countCompletedLinesForGrid(strikes) === 5) {
+      endGame('player');
+    } else if (countCompletedLinesForGrid(computerStrikes) === 5) {
+      endGame('computer');
+    } else {
+      // Switch turn back to player
+      switchTurn();
+    }
+    
+    saveState();
+  }, 1000 + Math.random() * 2000); // 1-3 seconds
+}
+
+function switchTurn() {
+  isPlayerTurn = !isPlayerTurn;
+  updateTurnIndicator();
+  saveState(); // Save turn state
+  
+  // If it's computer's turn, let computer play
+  if (!isPlayerTurn && gameMode === 'vsComputer') {
+    computerCallNumber();
+  }
+}
+
+function updateTurnIndicator() {
+  const indicator = document.getElementById('turn-indicator');
+  
+  if (isPlayerTurn) {
+    indicator.textContent = '🎯 Your Turn - Click a number!';
+    indicator.className = 'turn-indicator player-turn';
+  } else {
+    indicator.textContent = '🤖 Computer\'s Turn';
+    indicator.className = 'turn-indicator computer-turn';
+  }
+}
+
+function callNumber() {
+  if (gameEnded) return;
+  
+  // Generate list of uncalled numbers
+  let availableNumbers = [];
+  for (let i = 1; i <= 25; i++) {
+    if (!calledNumbers.includes(i)) {
+      availableNumbers.push(i);
+    }
+  }
+  
+  if (availableNumbers.length === 0) {
+    // All numbers called, end game
+    endGame('draw');
+    return;
+  }
+  
+  // Pick random uncalled number
+  const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+  currentCalledNumber = availableNumbers[randomIndex];
+  calledNumbers.push(currentCalledNumber);
+  
+  // Update display
+  document.getElementById('called-number').textContent = currentCalledNumber;
+  document.getElementById('numbers-left').textContent = availableNumbers.length - 1;
+  
+  // Mark number on both grids (this is the key fix!)
+  markNumberOnGrid(currentCalledNumber, grid, strikes);
+  if (gameMode === 'vsComputer') {
+    markNumberOnGrid(currentCalledNumber, computerGrid, computerStrikes);
+  }
+  
+  // Add visual highlight to called number
+  highlightCalledNumber(currentCalledNumber);
+  
+  // Redraw grids
+  if (gameMode === 'vsComputer') {
+    drawPlayerGrid();
+    drawComputerGrid();
+    drawBingoLetters('player-bingo-letters', strikes, grid);
+    drawBingoLetters('computer-bingo-letters', computerStrikes, computerGrid);
+  }
+  
+  // Check for wins
+  if (countCompletedLinesForGrid(strikes) === 5) {
+    endGame('player');
+  } else if (gameMode === 'vsComputer' && countCompletedLinesForGrid(computerStrikes) === 5) {
+    endGame('computer');
+  }
+  
+  // Save state after each number call
+  saveState();
+}
+
+function highlightCalledNumber(number) {
+  // Add temporary highlight to show which number was just called
+  setTimeout(() => {
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+      if (cell.textContent == number) {
+        cell.style.animation = 'numberHighlight 1s ease-out';
+        setTimeout(() => {
+          cell.style.animation = '';
+        }, 1000);
+      }
+    });
+  }, 100);
+}
+
+function markNumberOnGrid(number, gridArray, strikesArray) {
+  for (let i = 0; i < ROWS; i++) {
+    for (let j = 0; j < COLS; j++) {
+      if (gridArray[i][j] === number) {
+        strikesArray[i][j] = true;
+        return;
+      }
+    }
+  }
+}
+
+function updateSequenceDisplay() {
+  const sequenceContainer = document.getElementById('sequence-numbers');
+  if (!sequenceContainer) return;
+  
+  if (calledNumbers.length === 0) {
+    sequenceContainer.innerHTML = 'Start playing to see called numbers';
+    sequenceContainer.style.color = '#64748b';
+    return;
+  }
+  
+  // Clear existing content
+  sequenceContainer.innerHTML = '';
+  sequenceContainer.style.color = 'initial';
+  
+  // Add each called number as a styled element
+  calledNumbers.forEach((number, index) => {
+    const numberSpan = document.createElement('span');
+    numberSpan.className = 'sequence-number';
+    numberSpan.textContent = number;
+    
+    // Add slight delay for animation
+    setTimeout(() => {
+      sequenceContainer.appendChild(numberSpan);
+    }, index * 50);
+  });
+}
+
+function showSequenceDisplay() {
+  document.getElementById('sequence-display').style.display = 'block';
+  updateSequenceDisplay();
+}
+
+function hideSequenceDisplay() {
+  document.getElementById('sequence-display').style.display = 'none';
+}
+
+function endGame(winner) {
+  gameEnded = true;
+  
+  // Update turn indicator to show game over
+  const indicator = document.getElementById('turn-indicator');
+  if (indicator) {
+    indicator.textContent = '🏁 Game Over';
+    indicator.className = 'turn-indicator';
+  }
+  
+  // Show appropriate win message
+  setTimeout(() => {
+    createConfetti();
+    createFireworks();
+    setTimeout(() => {
+      if (winner === 'player') {
+        showWinOverlay('🏆 BINGO! You Won!', 'Congratulations, you beat the computer!');
+      } else if (winner === 'computer') {
+        showWinOverlay('🤖 Computer Wins!', 'Better luck next time!');
+      } else {
+        showWinOverlay('🤝 It\'s a Draw!', 'All numbers called, no winner!');
+      }
+    }, 500);
+  }, 300);
+}
+
+function switchTurn() {
+  isPlayerTurn = !isPlayerTurn;
+  updateTurnIndicator();
+  saveState(); // Save turn state
+  
+  // If it's computer's turn, let computer play
+  if (!isPlayerTurn && gameMode === 'vsComputer') {
+    computerCallNumber();
+  }
+}
+
+function highlightCalledNumber(number) {
+  // Add temporary highlight to show which number was just called
+  setTimeout(() => {
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+      if (cell.textContent == number) {
+        cell.style.animation = 'numberHighlight 1s ease-out';
+        setTimeout(() => {
+          cell.style.animation = '';
+        }, 1000);
+      }
+    });
+  }, 100);
+}
+
+function clearSetup() {
+  setupGrid = Array.from({length:ROWS}, ()=>Array(COLS).fill(0));
+  nextNumber = 1;
+  localStorage.removeItem('bingoSetupGrid');
+  localStorage.removeItem('bingoNextNumber');
+  showSetupPanel();
+}
+
 function randomizeGrid() {
   let nums = Array.from({length: 25}, (_,i) => i+1);
   for (let i = nums.length - 1; i > 0; i--) {
@@ -576,6 +1425,17 @@ function startGame() {
   strikes = Array.from({length:ROWS}, ()=>Array(COLS).fill(false));
   completedLinesTracker = []; // Reset completed lines tracker
   started = true;
+  gameEnded = false;
+  calledNumbers = [];
+  currentCalledNumber = null;
+  
+  // Randomly decide who starts (or let player choose in future)
+  isPlayerTurn = Math.random() < 0.5;
+  
+  // Setup computer if vs computer mode
+  if (gameMode === 'vsComputer') {
+    generateComputerGrid();
+  }
   
   // Clear any existing game state to ensure fresh start
   localStorage.removeItem('bingoGrid');
@@ -586,26 +1446,116 @@ function startGame() {
   
   saveState();
   document.getElementById('setup-panel').style.display='none';
-  document.getElementById('container').style.display='';
+  
+  // Show sequence display
+  showSequenceDisplay();
+  
+  if (gameMode === 'vsComputer') {
+    document.getElementById('vs-computer-interface').style.display='grid';
+    document.getElementById('container').style.display='none';
+    document.getElementById('bingo-letters').style.display='none'; // Hide main BINGO letters
+    drawPlayerGrid();
+    drawComputerGrid();
+    drawBingoLetters('player-bingo-letters', strikes, grid);
+    drawBingoLetters('computer-bingo-letters', computerStrikes, computerGrid);
+    updateTurnIndicator();
+    
+    // If computer starts, let it make the first move
+    if (!isPlayerTurn) {
+      computerCallNumber();
+    }
+  } else {
+    document.getElementById('vs-computer-interface').style.display='none';
+    document.getElementById('container').style.display='';
+    document.getElementById('bingo-letters').style.display='flex'; // Show main BINGO letters
+    drawGrid();
+  }
+  
   document.getElementById('reset-btn').style.display='';
   document.getElementById('debug-btn').style.display='';
-  drawGrid();
 }
 
 function loadState() {
   let g = localStorage.getItem('bingoGrid');
   let s = localStorage.getItem('bingoStrikes');
   let st = localStorage.getItem('bingoStarted');
+  let mode = localStorage.getItem('bingoGameMode');
+  
   if (g && s && st==='yes') {
     grid = JSON.parse(g);
     strikes = JSON.parse(s);
     started = true;
+    
+    // Load game mode
+    if (mode) {
+      gameMode = mode;
+    }
+    
+    // Load called numbers for solo mode too
+    let cn = localStorage.getItem('bingoCalledNumbers');
+    if (cn) {
+      calledNumbers = JSON.parse(cn);
+    }
+    
     document.getElementById('setup-panel').style.display='none';
-    document.getElementById('container').style.display='';
     document.getElementById('reset-btn').style.display='';
     document.getElementById('debug-btn').style.display='';
-    drawGrid();
-    return true;
+    
+    // Show sequence display for any started game
+    showSequenceDisplay();
+    
+    if (gameMode === 'vsComputer') {
+      // Load VS Computer specific state
+      let cg = localStorage.getItem('bingoComputerGrid');
+      let cs = localStorage.getItem('bingoComputerStrikes');
+      let ccn = localStorage.getItem('bingoCurrentCalledNumber');
+      let pt = localStorage.getItem('bingoIsPlayerTurn');
+      let ge = localStorage.getItem('bingoGameEnded');
+      
+      if (cg && cs) {
+        computerGrid = JSON.parse(cg);
+        computerStrikes = JSON.parse(cs);
+        currentCalledNumber = ccn || null;
+        isPlayerTurn = pt === 'yes';
+        gameEnded = ge === 'yes';
+        
+        // Setup VS Computer interface
+        document.getElementById('vs-computer-interface').style.display='grid';
+        document.getElementById('container').style.display='none';
+        document.getElementById('bingo-letters').style.display='none'; // Hide main BINGO letters
+        
+        // Update displays
+        drawPlayerGrid();
+        drawComputerGrid();
+        drawBingoLetters('player-bingo-letters', strikes, grid);
+        drawBingoLetters('computer-bingo-letters', computerStrikes, computerGrid);
+        updateTurnIndicator();
+        
+        // Update called number display
+        if (currentCalledNumber) {
+          document.getElementById('called-number').textContent = currentCalledNumber;
+        }
+        
+        // If it's computer's turn and game isn't ended, let computer play
+        if (!isPlayerTurn && !gameEnded) {
+          setTimeout(() => {
+            computerCallNumber();
+          }, 2000);
+        }
+        
+        return true;
+      } else {
+        // Incomplete VS Computer state, force restart
+        return false;
+      }
+    } else {
+      // Solo mode
+      document.getElementById('vs-computer-interface').style.display='none';
+      document.getElementById('container').style.display='';
+      document.getElementById('bingo-letters').style.display='flex'; // Show main BINGO letters
+      drawGrid();
+      return true;
+    }
   }
   return false;
 }
@@ -614,10 +1564,37 @@ function saveState() {
   localStorage.setItem('bingoGrid', JSON.stringify(grid));
   localStorage.setItem('bingoStrikes', JSON.stringify(strikes));
   localStorage.setItem('bingoStarted', started?'yes':'no');
+  localStorage.setItem('bingoGameMode', gameMode);
+  localStorage.setItem('bingoCalledNumbers', JSON.stringify(calledNumbers));
+  
+  // Save VS Computer specific state
+  if (gameMode === 'vsComputer') {
+    localStorage.setItem('bingoComputerGrid', JSON.stringify(computerGrid));
+    localStorage.setItem('bingoComputerStrikes', JSON.stringify(computerStrikes));
+    localStorage.setItem('bingoCurrentCalledNumber', currentCalledNumber || '');
+    localStorage.setItem('bingoIsPlayerTurn', isPlayerTurn ? 'yes' : 'no');
+    localStorage.setItem('bingoGameEnded', gameEnded ? 'yes' : 'no');
+  }
 }
 
 function resetGame() {
-  localStorage.clear();
+  // Clear all localStorage
+  localStorage.removeItem('bingoGrid');
+  localStorage.removeItem('bingoStrikes');
+  localStorage.removeItem('bingoStarted');
+  localStorage.removeItem('bingoComputerGrid');
+  localStorage.removeItem('bingoComputerStrikes');
+  localStorage.removeItem('bingoCalledNumbers');
+  localStorage.removeItem('bingoCurrentCalledNumber');
+  localStorage.removeItem('bingoIsPlayerTurn');
+  localStorage.removeItem('bingoGameEnded');
+  localStorage.removeItem('bingoSetupGrid');
+  localStorage.removeItem('bingoNextNumber');
+  // Keep game mode preference
+  
+  // Hide sequence display
+  hideSequenceDisplay();
+  
   location.reload();
 }
 
@@ -634,15 +1611,89 @@ function drawGrid() {
   }
   html+='</table>';
   document.getElementById('container').innerHTML = html;
-  drawBingoLetters();
+  drawBingoLetters(); // Update main BINGO letters
   updateDebugInfo();
 }
 
 function toggleStrike(i,j){
-  strikes[i][j]=!strikes[i][j];
-  saveState();
-  drawGrid();
-  checkWin();
+  if (gameMode === 'single') {
+    // Solo mode - allow toggling but prevent unselecting if number was called
+    const clickedNumber = grid[i][j];
+    
+    if (strikes[i][j]) {
+      // Trying to unselect - check if this number was called
+      if (calledNumbers.includes(clickedNumber)) {
+        // Don't allow unselecting a number that was previously called
+        return;
+      }
+      // Remove from called numbers if not manually called
+      const index = calledNumbers.indexOf(clickedNumber);
+      if (index > -1) {
+        calledNumbers.splice(index, 1);
+        updateSequenceDisplay();
+      }
+    } else {
+      // Selecting - add to called numbers if not already there
+      if (!calledNumbers.includes(clickedNumber)) {
+        calledNumbers.push(clickedNumber);
+        updateSequenceDisplay();
+      }
+    }
+    
+    strikes[i][j]=!strikes[i][j];
+    saveState();
+    drawGrid();
+    checkWin();
+  } else if (gameMode === 'vsComputer') {
+    // VS Computer mode - turn-based gameplay
+    if (!isPlayerTurn || gameEnded) {
+      return; // Not player's turn or game ended
+    }
+    
+    // Get the number that was clicked
+    const clickedNumber = grid[i][j];
+    
+    // Check if this number was already called
+    if (calledNumbers.includes(clickedNumber)) {
+      // Don't allow any changes to previously called numbers
+      return;
+    } else {
+      // This is a new number call - player's turn
+      calledNumbers.push(clickedNumber);
+      currentCalledNumber = clickedNumber;
+      
+      // Update sequence display
+      updateSequenceDisplay();
+      
+      // Update display
+      document.getElementById('called-number').textContent = clickedNumber;
+      
+      // Mark this number on both grids
+      markNumberOnGrid(clickedNumber, grid, strikes);
+      markNumberOnGrid(clickedNumber, computerGrid, computerStrikes);
+      
+      // Add visual highlight
+      highlightCalledNumber(clickedNumber);
+      
+      // Switch turn to computer
+      switchTurn();
+    }
+    
+    // Redraw grids and update BINGO letters
+    drawPlayerGrid();
+    drawComputerGrid();
+    drawBingoLetters('player-bingo-letters', strikes, grid);
+    drawBingoLetters('computer-bingo-letters', computerStrikes, computerGrid);
+    
+    // Check for wins
+    if (countCompletedLinesForGrid(strikes) === 5) {
+      endGame('player');
+    } else if (countCompletedLinesForGrid(computerStrikes) === 5) {
+      endGame('computer');
+    }
+    
+    saveState();
+  }
 }
 
 // FIXED: Proper line completion tracking
@@ -680,16 +1731,6 @@ function countCompletedLines() {
   // Update the tracker and return count (max 5 for B-I-N-G-O)
   completedLinesTracker = completedLines;
   return Math.min(completedLines.length, 5);
-}
-
-function drawBingoLetters() {
-  const completedCount = countCompletedLines();
-  let html='';
-  for (let i = 0; i < 5; i++) {
-    const isStruck = i < completedCount;
-    html += `<span class="${isStruck ? 'striked' : ''}">${BINGO[i]}</span>`;
-  }
-  document.getElementById('bingo-letters').innerHTML = html;
 }
 
 function toggleDebug() {
@@ -802,13 +1843,17 @@ function createFireworks() {
 
 function checkWin() {
   if (countCompletedLines() === 5) {
-    setTimeout(() => {
-      createConfetti();
-      createFireworks();
+    if (gameMode === 'vsComputer') {
+      endGame('player');
+    } else {
       setTimeout(() => {
-        showWinOverlay();
-      }, 500);
-    }, 300);
+        createConfetti();
+        createFireworks();
+        setTimeout(() => {
+          showWinOverlay();
+        }, 500);
+      }, 300);
+    }
   }
 }
 
@@ -823,7 +1868,24 @@ function hideInstructions() {
   localStorage.setItem('bingoInstructionsSeen', 'true');
 }
 
-function showWinOverlay() {
+function showWinOverlay(title = '🏆 BINGO! 🏆', subtitle = 'Congratulations, You Won!') {
+  document.querySelector('.win-title').textContent = title;
+  document.querySelector('.win-subtitle').textContent = subtitle;
+  
+  // Update the win sequence display
+  const winSequenceContainer = document.getElementById('win-sequence-numbers');
+  if (winSequenceContainer && calledNumbers.length > 0) {
+    winSequenceContainer.innerHTML = '';
+    calledNumbers.forEach(number => {
+      const numberSpan = document.createElement('span');
+      numberSpan.className = 'sequence-number';
+      numberSpan.textContent = number;
+      winSequenceContainer.appendChild(numberSpan);
+    });
+  } else if (winSequenceContainer) {
+    winSequenceContainer.innerHTML = '<span style="color: rgba(255,255,255,0.7);">No numbers called</span>';
+  }
+  
   document.getElementById('win-overlay').style.display = 'flex';
 }
 
@@ -847,6 +1909,13 @@ function checkFirstVisit() {
 
 // Initialize
 createStarfield();
+
+// Load game mode preference
+const savedGameMode = localStorage.getItem('bingoGameMode');
+if (savedGameMode) {
+  gameMode = savedGameMode;
+}
+
 if(!loadState()) {
   showSetupPanel();
   // Initialize BINGO letters as unstriked when starting fresh
@@ -855,6 +1924,9 @@ if(!loadState()) {
     html += `<span class="">${BINGO[i]}</span>`;
   }
   document.getElementById('bingo-letters').innerHTML = html;
+} else {
+  // State was loaded successfully
+  console.log('Game state restored successfully');
 }
 
 // Check for first visit after everything is loaded
