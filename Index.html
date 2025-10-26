@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Bingo Game (1–25)</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    table { border-collapse: collapse; margin: 20px auto; }
+    td {
+      width: 50px; height: 50px; border: 1px solid #333;
+      font-size: 24px; cursor: pointer; text-align: center;
+      transition: background 0.2s;
+    }
+    td.striked { background: #90ee90; }
+    #bingo-letters span {
+      font-size: 32px;
+      margin: 0 8px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 2px solid #333;
+      background: #eee;
+      color: #333;
+    }
+    #bingo-letters span.striked { text-decoration: line-through; background: #90ee90; }
+    button { font-size: 18px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <h2>BINGO</h2>
+  <div id="bingo-letters"></div>
+  <div id="container"></div>
+  <button onclick="resetGame()">Reset</button>
+  <script>
+    // Generate or load game state
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    function saveState() {
+      localStorage.setItem('bingoGrid', JSON.stringify(grid));
+      localStorage.setItem('bingoStrikes', JSON.stringify(strikes));
+    }
+    function loadState() {
+      const g = localStorage.getItem('bingoGrid');
+      const s = localStorage.getItem('bingoStrikes');
+      if (g && s) {
+        grid = JSON.parse(g);
+        strikes = JSON.parse(s);
+        return true;
+      }
+      return false;
+    }
+    function resetGame() {
+      localStorage.clear();
+      location.reload();
+    }
+
+    // Initial setup
+    let grid, strikes;
+    const BINGO = ['B','I','N','G','O'];
+    if (!loadState()) {
+      let nums = Array.from({length: 25}, (_,i) => i+1);
+      shuffle(nums);
+      grid = [];
+      for (let i = 0; i < 5; i++) {
+        grid.push(nums.slice(i*5, (i+1)*5));
+      }
+      strikes = Array.from({length: 5}, () => Array(5).fill(false));
+      saveState();
+    }
+
+    // Render Bingo grid
+    function drawGrid() {
+      const container = document.getElementById('container');
+      let html = '<table>';
+      for (let i = 0; i < 5; i++) {
+        html += '<tr>';
+        for (let j = 0; j < 5; j++) {
+          const num = grid[i][j];
+          const cls = strikes[i][j] ? 'striked' : '';
+          html += `<td class="${cls}" onclick="toggleStrike(${i},${j})">${num}</td>`;
+        }
+        html += '</tr>';
+      }
+      html += '</table>';
+      container.innerHTML = html;
+      drawBingoLetters();
+    }
+
+    // Striking/unstriking cell
+    function toggleStrike(i, j) {
+      strikes[i][j] = !strikes[i][j];
+      saveState();
+      drawGrid();
+      checkWin();
+    }
+
+    // Count completed rows/columns, strike letters
+    function strikeProgress() {
+      let lines = 0;
+      for (let i = 0; i < 5; i++) { // Rows
+        if (strikes[i].every(v=>v)) lines++;
+      }
+      for (let j = 0; j < 5; j++) { // Columns
+        if (strikes.every(row=>row[j])) lines++;
+      }
+      return lines > 5 ? 5 : lines; // Max out at 5
+    }
+
+    function drawBingoLetters() {
+      const lines = strikeProgress();
+      let html = '';
+      for (let i = 0; i < 5; i++) {
+        html += `<span class="${i < lines ? 'striked' : ''}">${BINGO[i]}</span>`;
+      }
+      document.getElementById('bingo-letters').innerHTML = html;
+    }
+
+    // Win alert
+    function checkWin() {
+      if (strikeProgress() === 5) {
+        setTimeout(() => alert("BINGO! You won!"), 50);
+      }
+    }
+
+    drawGrid();
+  </script>
+</body>
+</html>
