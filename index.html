@@ -348,39 +348,41 @@
     /* Responsive Design */
     @media (max-width: 768px) {
       .game-container {
-        max-width: 95vw;
-        width: 95vw;
-        padding: 25px;
+        max-width: 98vw;
+        width: 98vw;
+        padding: 15px;
       }
       
-      td { width: 60px; height: 60px; font-size: 22px; }
-      h1 { font-size: 48px; letter-spacing: 6px; }
-      #bingo-letters span { width: 50px; height: 50px; font-size: 28px; }
+      td { width: 45px; height: 45px; font-size: 16px; }
+      h1 { font-size: 42px; letter-spacing: 4px; }
+      #bingo-letters span { width: 40px; height: 40px; font-size: 22px; }
       
       table {
-        max-width: 320px;
+        max-width: 240px;
+        border-spacing: 4px;
       }
       
       .vs-computer-interface {
-        grid-template-columns: 1fr;
-        gap: 25px;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 15px;
         text-align: center;
         justify-items: center;
-        padding: 0 10px;
+        padding: 0 5px;
         place-items: center;
       }
       
       .called-number-display {
-        order: -1;
+        order: 0;
         min-width: auto;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         width: 100%;
-        max-width: 300px;
+        max-width: 160px;
+        padding: 15px 10px;
       }
       
       .player-section {
         width: 100%;
-        max-width: 350px;
+        max-width: 260px;
         margin: 0 auto;
         min-width: auto;
       }
@@ -398,39 +400,50 @@
 
     @media (max-width: 480px) {
       .game-container {
-        padding: 20px;
-        width: 98vw;
+        padding: 12px;
+        width: 99vw;
       }
       
       table {
-        max-width: 280px;
+        max-width: 200px;
+        border-spacing: 3px;
       }
       
       .vs-computer-interface {
-        gap: 20px;
-        padding: 0 5px;
+        gap: 8px;
+        padding: 0 2px;
       }
       
       .player-section {
         min-width: auto;
-        max-width: 300px;
+        max-width: 200px;
       }
       
-      td { width: 50px; height: 50px; font-size: 18px; }
+      td { width: 35px; height: 35px; font-size: 14px; }
       
       .player-bingo-letters {
-        gap: 8px;
+        gap: 4px;
       }
       
       .player-bingo-letters span {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
       }
       
       .called-number-display {
-        max-width: 260px;
-        padding: 18px;
+        max-width: 120px;
+        padding: 12px 8px;
+      }
+      
+      .called-number {
+        font-size: 28px !important;
+      }
+      
+      .turn-indicator {
+        font-size: 12px;
+        padding: 8px 12px;
+        margin-bottom: 8px;
       }
     }
 
